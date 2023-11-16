@@ -38,10 +38,12 @@ async def recommend_song(req: RecommendationRequest):
         print(response)
         if response.status_code == 200:
             data = response.json()
+            print(data)
             main_text = data["req"]["data"]["mainText"]
             song_infos = data["req"]["data"]["songInfos"]
+            print(song_infos)
             # 提取songId列表
-            song_urls = [ 'https://y.qq.com/n/ryqq/songDetail/' + song_info["songName"] for song_info in song_infos]
+            song_urls = ['https://y.qq.com/n/ryqq/songDetail/' + song_info["songName"] for song_info in song_infos]
             print({"mainText": main_text, "song_urls": song_urls})
             return {"mainText": main_text, "song_urls": song_urls}
         else:
