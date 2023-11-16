@@ -15,7 +15,8 @@ async def get_main():
 
 
 @app.post("/recommend/")
-async def recommend_song(text: str):
+async def recommend_song(req: RecommendationRequest):
+    text = req.text
     try:
         # 定义外部API请求的数据
         payload = {
