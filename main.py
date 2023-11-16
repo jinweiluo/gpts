@@ -37,8 +37,14 @@ async def recommend_song(req: RecommendationRequest):
         response = requests.post(external_api_url, json=payload, headers=headers)
         print(response)
         if response.status_code == 200:
-            print(response.json())
-            return response.json()
+            data = response.json()
+            main_text = data["req"]["data"]["mainText"]
+            song_infos = data["req"]["data"]["songInfos"]
+            # 提取songId列表
+            song_ids = [song_info["songId"] for song_info in song_infos]
+            return {"mainText": main_text, "songIds": song_ids}
+            # print(response.json())
+            # return response.json()
         else:
             raise HTTPException(status_code=response.status_code, detail="External API request failed")
 
