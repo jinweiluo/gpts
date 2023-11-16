@@ -41,10 +41,9 @@ async def recommend_song(req: RecommendationRequest):
             main_text = data["req"]["data"]["mainText"]
             song_infos = data["req"]["data"]["songInfos"]
             # 提取songId列表
-            song_ids = [song_info["songId"] for song_info in song_infos]
-            return {"mainText": main_text, "songIds": song_ids}
-            # print(response.json())
-            # return response.json()
+            song_urls = [ 'https://y.qq.com/n/ryqq/songDetail/' + song_info["songName"] for song_info in song_infos]
+            print({"mainText": main_text, "song_urls": song_urls})
+            return {"mainText": main_text, "song_urls": song_urls}
         else:
             raise HTTPException(status_code=response.status_code, detail="External API request failed")
 
