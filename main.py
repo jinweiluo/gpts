@@ -17,6 +17,7 @@ async def get_main():
 @app.post("/recommend/")
 async def recommend_song(req: RecommendationRequest):
     text = req.text
+    print(text)
     try:
         # 定义外部API请求的数据
         payload = {
@@ -34,8 +35,9 @@ async def recommend_song(req: RecommendationRequest):
         }
         external_api_url = "http://ut.y.qq.com/cgi-bin/musicu.fcg"
         response = requests.post(external_api_url, json=payload, headers=headers)
-
+        print(response)
         if response.status_code == 200:
+            print(response.json())
             return response.json()
         else:
             raise HTTPException(status_code=response.status_code, detail="External API request failed")
