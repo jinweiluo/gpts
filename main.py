@@ -26,7 +26,7 @@ async def recommend_song(req: RecommendationRequest):
                 "method": "chat",
                 "param": {
                     "uin": 853265363,
-                    "userText": text  # 使用传入的 text 参数替代 userText
+                    "userText": "[REC_SONG]" + text  # 使用传入的 text 参数替代 userText
                 }
             }
         }
